@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env.
 
 from openai import OpenAI
-client = OpenAI(base_url="https://app.tryhelix.ai/v1")
+client = OpenAI(base_url="https://api.together.xyz/v1")
 name = input("What is your name? ")
 lesson = input("what topic are you teaching? ")
 ability = input("what ability are the class? ")
@@ -30,7 +30,7 @@ return the result in the following format: """ + """
 ```
 """
 response = client.chat.completions.create(
-  model="mistralai/Mistral-7B-Instruct-v0.1",
+  model="mistralai/Mixtral-8x7B-Instruct-v0.1",
   messages=[
     {
       "role": "user",
@@ -45,7 +45,7 @@ response = client.chat.completions.create(
   presence_penalty=0
 )
 # print(response)
-# print(response.choices[0].message.content)
+print(response.choices[0].message.content)
 
 resp = response.choices[0].message.content
 resp = resp.split("```json")[1]
