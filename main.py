@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env.
 
 from openai import OpenAI
-client = OpenAI(base_url="https://api.together.xyz/v1")
+client = OpenAI() # base_url="https://api.together.xyz/v1")
 name = input("What is your name? ")
 lesson = input("what topic are you teaching? ")
 ability = input("what ability are the class? ")
@@ -30,7 +30,7 @@ return the result in the following format: """ + """
 ```
 """
 response = client.chat.completions.create(
-  model="mistralai/Mixtral-8x7B-Instruct-v0.1",
+  model="gpt-4-1106-preview",
   messages=[
     {
       "role": "user",
@@ -38,11 +38,7 @@ response = client.chat.completions.create(
       # "content": "write the text for each slide of a powerpoint to teach a" + length + "lesson on" + lesson + "for" + ability + "ability secondary class"
     }
   ],
-  temperature=1,
-  max_tokens=256,
-  top_p=1,
-  frequency_penalty=0,
-  presence_penalty=0
+  temperature=0.5,
 )
 # print(response)
 print(response.choices[0].message.content)
